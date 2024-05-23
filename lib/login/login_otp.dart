@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 
 class LoginWithOtp extends StatefulWidget {
-   LoginWithOtp({super.key});
+   const LoginWithOtp({super.key});
    static String verify = "";
 
   @override

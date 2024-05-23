@@ -9,9 +9,9 @@ class OtpScreen extends StatelessWidget {
   OtpScreen({super.key});
 
   final FirebaseAuth auth = FirebaseAuth.instance;
-  var code = "";
   @override
   Widget build(BuildContext context) {
+    var code = "";
     return Scaffold(
       body: SafeArea(child: Padding(padding: const EdgeInsets.all(20),
       child: Center(
@@ -32,12 +32,14 @@ class OtpScreen extends StatelessWidget {
               try{
                 PhoneAuthCredential credential = PhoneAuthProvider.credential(verificationId: LoginWithOtp.verify, smsCode: code);
               await auth.signInWithCredential(credential);
+              if(context.mounted){
               Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>  const HomePage()),);
+              }
               } catch(e){
+                debugPrint(e.toString());
                 if(context.mounted){
                 showDialog(context: context, 
                 builder: (BuildContext context) { 
-                  print(e);
                   return  AlertDialog(
                     title: const Text("Wrong Otp"),
                     actions: [
