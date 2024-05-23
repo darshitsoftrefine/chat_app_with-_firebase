@@ -8,7 +8,7 @@ import '../home/home_page.dart';
 class OtpScreen extends StatelessWidget {
   OtpScreen({super.key});
 
-  FirebaseAuth auth = FirebaseAuth.instance;
+  final FirebaseAuth auth = FirebaseAuth.instance;
   var code = "";
   @override
   Widget build(BuildContext context) {
@@ -19,8 +19,8 @@ class OtpScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text("Enter Otp"),
-            SizedBox(height: 20,),
+            const Text("Enter Otp"),
+            const SizedBox(height: 20,),
             OtpTextField(
               numberOfFields: 6,
               showFieldAsBox: true, 
@@ -28,26 +28,27 @@ class OtpScreen extends StatelessWidget {
                 code = value;
               },
             ),
-            ElevatedButton(onPressed: ()async{
+            ElevatedButton(onPressed: () async{
               try{
                 PhoneAuthCredential credential = PhoneAuthProvider.credential(verificationId: LoginWithOtp.verify, smsCode: code);
-        
               await auth.signInWithCredential(credential);
               Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>  const HomePage()),);
               } catch(e){
+                if(context.mounted){
                 showDialog(context: context, 
                 builder: (BuildContext context) { 
                   print(e);
                   return  AlertDialog(
-                    title: Text("Wrong Otp"),
+                    title: const Text("Wrong Otp"),
                     actions: [
                       ElevatedButton(onPressed: () {
                         Navigator.pop(context);
-                      }, child: Text("Go back"))
+                      }, child: const Text("Go back"))
                     ],
                   );
                  },
                 );
+                }
               }
               
             }, child: const Text("Verify"))
