@@ -1,7 +1,7 @@
 import 'package:chat_app/login/login_otp.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
+import 'package:pinput/pinput.dart';
 
 import '../home/home_page.dart';
 
@@ -21,19 +21,18 @@ class OtpScreen extends StatelessWidget {
           children: [
             const Text("Enter Otp"),
             const SizedBox(height: 20,),
-            OtpTextField(
-              numberOfFields: 6,
-              showFieldAsBox: true, 
-              onCodeChanged: (value){
-                code = value;
-              },
+            Pinput(
+              length: 6,
+              showCursor: true,
+               //androidSmsAutofillMethod:  AndroidSmsAutofillMethod.smsUserConsentApi,
             ),
+            const SizedBox(height: 20,),
             ElevatedButton(onPressed: () async{
               try{
                 PhoneAuthCredential credential = PhoneAuthProvider.credential(verificationId: LoginWithOtp.verify, smsCode: code);
               await auth.signInWithCredential(credential);
               if(context.mounted){
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>  const HomePage()),);
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>  HomePage()),);
               }
               } catch(e){
                 debugPrint(e.toString());
@@ -53,7 +52,7 @@ class OtpScreen extends StatelessWidget {
                 }
               }
               
-            }, child: const Text("Verify"))
+            }, child: const Text("Verify")),
           ],
         ),
       ),

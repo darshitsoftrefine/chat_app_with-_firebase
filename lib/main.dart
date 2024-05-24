@@ -1,4 +1,7 @@
 import 'package:chat_app/login/login_otp.dart';
+import 'package:chat_app/temp.dart';
+import 'package:chat_app/utils/bottom_bar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'firebase_options.dart';
@@ -23,7 +26,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const LoginWithOtp(),
+      home: Temporary()
     );
   }
 }
