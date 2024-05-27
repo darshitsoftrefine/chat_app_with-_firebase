@@ -1,3 +1,4 @@
+import 'package:chat_app/profile/profile_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -68,7 +69,7 @@ class _OtpScreenState extends State<OtpScreen> {
           } catch(e){
              debugPrint("You got an error $e");
                                                   }
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>  const HomePage()),);
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> ProfilePage()),);
               });
 
               
