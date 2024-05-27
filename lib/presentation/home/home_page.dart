@@ -1,4 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:chat_app/chat_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -12,19 +12,28 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 final databaseReference = FirebaseDatabase.instance;
-
-FirebaseFirestore firestore = FirebaseFirestore.instance;
 FirebaseAuth auth = FirebaseAuth.instance;
 
 DatabaseReference ref = FirebaseDatabase.instance.ref();
 
+ String displayText = 'Welcome';
+
+
 final searchController = TextEditingController();
+
+@override
+  void initState() {
+    super.initState();
+    _activateListeners();
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
-    var uid = auth.currentUser?.uid;
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.teal,
         title: const Text("WhatsApp", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),),
       ),
@@ -67,58 +76,42 @@ final searchController = TextEditingController();
                   ],
                 ),
                 const SizedBox(height: 20,),
-                StreamBuilder(
-                  stream: firestore.collection('users').snapshots(),
-                  builder: (context, snapshot) { 
-                      return ListView.builder(
-                        physics: const NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        itemCount: 6, 
-                        itemBuilder: (BuildContext context, int index) { 
-                          return const Column(
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      CircleAvatar(
-                                        backgroundImage: NetworkImage('https://via.placeholder.com/150'),
-                                        backgroundColor: Colors.transparent,
-                                      ),
-                                      SizedBox(width: 10,),
-                                      Column(
-                                        children: [
-                                          Text("UserName"),
-                                          //SizedBox(height: 5,),
-                                          Text("Last Message"),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                  Text("Timestamp", style: TextStyle(color: Colors.grey),)
-                                ],
-                              ),
-                              SizedBox(height: 20,)
-                            ],
-                          );
-                         },
-                      );
-                    } 
-                
-                )
+                ElevatedButton(onPressed: (){
+                 ChatViewModel().loadAllUserList();
+                }, child: const Text("Show")),
+                Text(displayText),
+                // StreamBuilder(stream: ref.child('users/').onValue, 
+                // builder: (context, snapshot){
+                //   if(snapshot.hasData){
+                //     final dailyUsers = UserModel.fromRTDB(Map<String, dynamic>.from(
+                //       (snapshot.data! as Event).snapshot.value
+                //     ));
+                    
+                //   }
+                // })
               ],
             ),
           ),
           ),
         ),
       ),
-      // bottomNavigationBar: BottomBar(),
     );
   }
 
   Future<void> signOut() async {
     await FirebaseAuth.instance.signOut();
   }
+
+    void _activateListeners() {
+    ref.child("users/").onValue.listen((event) {
+      final String msg = event.snapshot.value.toString();
+      setState(() {
+        displayText = msg;
+      });
+    });
+  }
 }
+
+// name
+// phoneNumber
+// city

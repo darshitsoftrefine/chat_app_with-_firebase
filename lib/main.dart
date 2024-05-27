@@ -1,12 +1,11 @@
-import 'package:chat_app/login/login_otp.dart';
-import 'package:chat_app/temp.dart';
 import 'package:chat_app/utils/bottom_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'firebase_options.dart';
+import 'presentation/login/login_with_otp.dart';
 
-void main() async{
+Future<void> main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform
@@ -26,7 +25,16 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: Temporary()
+      home: StreamBuilder(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (context, AsyncSnapshot snapshot){
+          if(snapshot.hasData){
+            return BottomBar();
+          }else {
+            return const LoginWithOtp();
+          }
+        },
+      )
     );
   }
 }

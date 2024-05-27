@@ -1,5 +1,5 @@
-import 'package:chat_app/calls/calls_page.dart';
-import 'package:chat_app/home/home_page.dart';
+import 'package:chat_app/presentation/calls/voice_video_call.dart';
+import 'package:chat_app/presentation/home/home_page.dart';
 import 'package:flutter/material.dart';
 class BottomBar extends StatelessWidget {
   BottomBar({super.key});
@@ -9,7 +9,8 @@ class BottomBar extends StatelessWidget {
 
   final List<Widget> _widgetOptions = <Widget>[
     const HomePage(),
-    const CallsPage(),
+    const CallsPage()
+    
   ];
 
   void _onItemTap(int index) {
