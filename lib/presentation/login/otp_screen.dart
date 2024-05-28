@@ -1,10 +1,9 @@
-import 'package:chat_app/profile/profile_page.dart';
+import 'package:chat_app/presentation/profile/profile_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
-
-import '../home/home_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class OtpScreen extends StatefulWidget {
   final String verificationId;
@@ -42,11 +41,13 @@ class _OtpScreenState extends State<OtpScreen> {
             ),
             const SizedBox(height: 20,),
             ElevatedButton(onPressed: () async{
+              SharedPreferences prefs = await SharedPreferences.getInstance();
               try{
                 PhoneAuthCredential credential = await PhoneAuthProvider.credential(
                   verificationId: widget.verificationId,
                   smsCode: otpController.text.toString());
               FirebaseAuth.instance.signInWithCredential(credential).then((value) async {
+                prefs.setString("uid", value.user!.uid);
                try{
                 bool isEmpty = await isDatabaseEmpty(database);
                 if(isEmpty){
@@ -58,7 +59,7 @@ class _OtpScreenState extends State<OtpScreen> {
                           'phone': value.user?.phoneNumber,
                           });
                 } else {
-                  await users.child('users/').push().set({'email': value.user?.email,
+                  await users.push().set({'email': value.user?.email,
                           'name': value.user?.displayName,
                           'uid': value.user?.uid,
                           'photo': value.user?.photoURL,

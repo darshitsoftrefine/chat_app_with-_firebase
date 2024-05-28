@@ -1,4 +1,4 @@
-import 'package:chat_app/utils/bottom_bar.dart';
+import 'package:chat_app/presentation/profile/edit_profile_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, AsyncSnapshot snapshot){
           if(snapshot.hasData){
-            return BottomBar();
+            return const EditProfilePage();
           }else {
             return const LoginWithOtp();
           }

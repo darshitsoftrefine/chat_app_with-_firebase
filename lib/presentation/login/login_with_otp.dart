@@ -63,7 +63,8 @@ class _LoginWithOtpState extends State<LoginWithOtp> {
                   ),
                   ElevatedButton(
                     onPressed: () async {
-                      
+                      SharedPreferences preferences = await SharedPreferences.getInstance();
+                      preferences.setString('phoneNumber', phoneNum);
                     await FirebaseAuth.instance.verifyPhoneNumber(
               phoneNumber: phoneNum,
               verificationCompleted: (PhoneAuthCredential credential) {

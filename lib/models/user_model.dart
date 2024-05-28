@@ -11,7 +11,7 @@ class UserModel {
       name: users['name'],
        uid: users['uid'],
        phoneNumber: users['phoneNumber'],
-       fcmToken: users['fcmToken'],
+       fcmToken: users['fcmToken'] ?? "",
        );
   }
 }
