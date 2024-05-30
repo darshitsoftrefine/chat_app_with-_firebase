@@ -1,16 +1,16 @@
-import 'package:chat_app/presentation/profile/edit_profile_page.dart';
+import 'package:chat_app/views/home/home_screen.dart';
+import 'package:chat_app/views/login/login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'firebase_options.dart';
-import 'presentation/login/login_with_otp.dart';
 
 Future<void> main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform
   );
-  runApp(const MyApp());
+  runApp(const MyApp(),);
 }
 
 class MyApp extends StatelessWidget {
@@ -29,9 +29,9 @@ class MyApp extends StatelessWidget {
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, AsyncSnapshot snapshot){
           if(snapshot.hasData){
-            return const EditProfilePage();
+            return const HomeScreen();
           }else {
-            return const LoginWithOtp();
+            return LoginScreen();
           }
         },
       )
