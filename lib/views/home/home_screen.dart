@@ -18,16 +18,17 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Home Screen "),
+        title: const Text("Home Screen ", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
         centerTitle: true,
+         actions: [
+          IconButton(onPressed: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileScreen()));
+          }, icon: const Icon(Icons.person))
+        ],
         leading: IconButton(onPressed: (){
           AuthService().signOut();
         }, icon: const Icon(Icons.logout),),
       ),
-
-      endDrawer: IconButton(onPressed: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileScreen()));
-      }, icon: const Icon(Icons.person)),
 
       body: SafeArea(child: Padding(padding: const EdgeInsets.all(10.0),
       child: SingleChildScrollView(
@@ -38,7 +39,6 @@ class _HomeScreenState extends State<HomeScreen> {
               if(snapshot.hasError){
                 return const Center(child: Text("Error in showing data"),);
               } 
-        
               if(snapshot.connectionState == ConnectionState.waiting){
                 return const Center(child: CircularProgressIndicator(),);
               }

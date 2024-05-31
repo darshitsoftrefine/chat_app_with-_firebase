@@ -56,8 +56,7 @@ class LoginScreen extends StatelessWidget {
                                       if(context.mounted) {
                                         Navigator.pushAndRemoveUntil(context,
                                             MaterialPageRoute(
-                                                builder: (context) => const HomeScreen()), (
-                                                route) => false);
+                                                builder: (context) => const HomeScreen()), (route) => false);
                                       }
                                     }
                                   }
@@ -81,9 +80,9 @@ class LoginScreen extends StatelessWidget {
   }
 
 
-   TextField inputDetails(TextEditingController name, String label) {
+   TextField inputDetails(TextEditingController controller, String label) {
     return TextField(
-            controller: name,
+            controller: controller,
       decoration: InputDecoration(
         border: const OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(5.0)),
           borderSide: BorderSide(color: Colors.black, style: BorderStyle.solid),),

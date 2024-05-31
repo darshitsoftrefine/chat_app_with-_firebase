@@ -15,11 +15,12 @@ class ProfileScreen extends StatelessWidget {
         padding: const EdgeInsets.all(10.0),
         child: Column(
           children: [
-            const Text('Name'),
+            const Text('Unique Id'),
+            const SizedBox(height: 5,),
+            Text(_auth.currentUser!.uid.toString()),
             const SizedBox(height: 10,),
-            Text(_auth.currentUser!.displayName.toString()),
             const Text("Email"),
-            const SizedBox(height: 10,),
+            const SizedBox(height: 5,),
             Text(_auth.currentUser!.email.toString())
           ],
         ),
