@@ -1,5 +1,4 @@
 
-import 'package:chat_app/utils/bottom_bar.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -78,7 +77,7 @@ DatabaseReference database = FirebaseDatabase.instance.ref();
                           'city': cityController.text.toString() == "" ? city : cityController.text.toString(),
                           'phone': phone,
                           });
-                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>  BottomBar()),);
+                      //Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>  BottomBar()),);
           }, child: const Text("Edit Profile Details"))
         ],
       ),

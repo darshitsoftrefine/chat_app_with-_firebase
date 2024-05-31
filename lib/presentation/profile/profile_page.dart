@@ -1,4 +1,3 @@
-import 'package:chat_app/utils/bottom_bar.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -74,7 +73,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       //     'city': cityController.text.toString(),
                       //     'phone': phone,
                       //     });
-                      validate ? Container() : Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> BottomBar()),);
+                      validate ? Container() :  Container();//Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> BottomBar()),);
           }, child: const Text("Add Profile Details"))
         ],
       ),
