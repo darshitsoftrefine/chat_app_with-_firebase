@@ -84,7 +84,7 @@ class _ChatScreenState extends State<ChatScreen> {
         children: [
         Text(data['senderEmail']),
         const SizedBox(height: 5.0,),
-        ChatBubble(message: data['message'], color: data['senderId'] == _firebaseAuth.currentUser!.uid ? Colors.lightBlueAccent : Colors.lightGreen,),
+        ChatBubble(message: data['message'], color: data['senderId'] == _firebaseAuth.currentUser!.uid ? Colors.lightBlueAccent : Colors.lightGreen, timestamp: data['timestamp'],),
         const Icon(Icons.done_all)
         //Text(data['timestamp'].())
         //data['imageUrl'] == "" ? Container() : Image.network(data['imageUrl'])
