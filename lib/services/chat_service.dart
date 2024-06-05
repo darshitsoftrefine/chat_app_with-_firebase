@@ -7,7 +7,7 @@ class ChatService extends ChangeNotifier {
 
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
-
+  
 
   Future<void> sendMessages(String receiverId, String message) async {
     //get current user info
@@ -21,7 +21,8 @@ class ChatService extends ChangeNotifier {
       senderEmail: currentUserEmail, 
       receiverId: receiverId, 
       message: message, 
-      timestamp: timestamp);
+      timestamp: timestamp,
+      );
 
       // Create chat room
 
@@ -46,7 +47,7 @@ class ChatService extends ChangeNotifier {
     return _firebaseFirestore.collection("chat_rooms")
     .doc(chatRoomId)
     .collection("messages")
-    .orderBy('timestamp', descending: false)
+    .orderBy('timestamp', descending: true)
     .snapshots();
 
   }

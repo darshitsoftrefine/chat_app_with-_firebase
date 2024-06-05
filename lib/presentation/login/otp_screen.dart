@@ -2,7 +2,6 @@ import 'package:chat_app/presentation/profile/profile_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:pinput/pinput.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class OtpScreen extends StatefulWidget {
@@ -34,11 +33,11 @@ class _OtpScreenState extends State<OtpScreen> {
           children: [
             const Text("Enter Otp"),
             const SizedBox(height: 20,),
-            Pinput(
-              controller: otpController,
-              length: 6,
-              showCursor: true,
-            ),
+            // Pinput(
+            //   controller: otpController,
+            //   length: 6,
+            //   showCursor: true,
+            // ),
             const SizedBox(height: 20,),
             ElevatedButton(onPressed: () async{
               SharedPreferences prefs = await SharedPreferences.getInstance();

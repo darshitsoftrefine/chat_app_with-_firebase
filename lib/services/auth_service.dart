@@ -26,6 +26,7 @@ class AuthService {
       });
       return userCredential.user;
     } on FirebaseAuthException catch (e) {
+      print(e.toString());
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text(e.message.toString()), backgroundColor: Colors.red,));
     }
@@ -49,6 +50,7 @@ class AuthService {
       });
       return userCredential.user;
     } on FirebaseAuthException catch (e) {
+      print(e.toString());
       if (e.code == 'user-not-found') {
         debugPrint('No user found for that email.');
       }

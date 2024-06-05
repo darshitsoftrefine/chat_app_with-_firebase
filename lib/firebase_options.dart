@@ -79,10 +79,11 @@ class DefaultFirebaseOptions {
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDqJ5QiRXnjwelIqFApx5JGOekDuh58UbQ',
-    appId: '1:289963014447:android:d15312b8282f43886dc9da',
+    apiKey: 'AIzaSyBpYwikelMxXV3x_ZBFFI4g82x2ksB6OfY',
+    appId: '1:289963014447:android:2f0e51a9dbd895956dc9da',
     messagingSenderId: '289963014447',
     projectId: 'chatapp-a7219',
+    databaseURL: 'https://chatapp-a7219-default-rtdb.firebaseio.com',
     storageBucket: 'chatapp-a7219.appspot.com',
   );
 
