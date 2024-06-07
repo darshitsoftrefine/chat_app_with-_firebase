@@ -1,8 +1,11 @@
 # chat_app
 
 A new Flutter project.
+Built a whatsapp like app using flutter and firebase.
 
-## Getting Started
+It has a login screen but you can use the email and password given below to access the different featues.
+Email :- morning@gmail.com
+Password :- morning
 
 This project is a starting point for a Flutter application.
 
