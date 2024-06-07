@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:chat_app/services/chat_service.dart';
 import 'package:chat_app/utils/chat_bubble.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -22,6 +21,7 @@ class _ChatScreenState extends State<ChatScreen> {
   final TextEditingController _messageController = TextEditingController();
   final ChatService _chatService = ChatService();
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  //final User = FirebaseAuth.instance.currentUser;
   String imageUrl =  '';
 
   void sendMessages() async {
@@ -29,17 +29,24 @@ class _ChatScreenState extends State<ChatScreen> {
       await _chatService.sendMessages(widget.receiverUserId, _messageController.text);
       _messageController.clear();
     } else {
-      _messageController.text = imageUrl;
+      await _chatService.sendMessages(widget.receiverUserId, imageUrl);
     }
   }
-
 
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.receiverUserEmail),
+        title: Row(
+          children: [
+            const CircleAvatar(
+              child: Icon(Icons.person),
+            ),
+            const SizedBox(width: 10,),
+            Text(widget.receiverUserEmail),
+          ],
+        ),
       ),
       body: Column(
         children: [
@@ -85,7 +92,6 @@ class _ChatScreenState extends State<ChatScreen> {
         Text(data['senderEmail']),
         const SizedBox(height: 5.0,),
         ChatBubble(message: data['message'], color: data['senderId'] == _firebaseAuth.currentUser!.uid ? Colors.lightBlueAccent : Colors.lightGreen, timestamp: data['timestamp'],),
-        const Icon(Icons.done_all)
         //Text(data['timestamp'].())
         //data['imageUrl'] == "" ? Container() : Image.network(data['imageUrl'])
       ],),
@@ -113,7 +119,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
           ImagePicker imagePicker = ImagePicker();
           XFile? file = await imagePicker.pickImage(source: ImageSource.gallery);
-          print(file!.path);
+          debugPrint(file!.path);
           String uniqueFileName = DateTime.now().microsecondsSinceEpoch.toString();
 
           Reference referenceRoot = FirebaseStorage.instance.ref();
@@ -123,9 +129,10 @@ class _ChatScreenState extends State<ChatScreen> {
           try {
            await referenceImageToUpload.putFile(File(file.path));
            imageUrl = await referenceImageToUpload.getDownloadURL();
-           print("Image upload $imageUrl");
+           debugPrint("Image upload $imageUrl");
+           sendMessages();
           } catch(e) {
-            print(e.toString());
+            debugPrint(e.toString());
           }
         }, icon: const Icon(Icons.image)),
 
@@ -143,4 +150,5 @@ class _ChatScreenState extends State<ChatScreen> {
       ),
     );
   }
+  
 }

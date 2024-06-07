@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 import '../chats/chat_screen.dart';
 import '../profile/profile_screen.dart';
+import '../video_call/video_call_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -52,6 +53,10 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       )),
+      floatingActionButton: FloatingActionButton(onPressed: (){
+        Navigator.push(context, MaterialPageRoute(builder: (context) => VideoCallScreen()));
+      },child: const Icon(Icons.video_call),),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }
 
