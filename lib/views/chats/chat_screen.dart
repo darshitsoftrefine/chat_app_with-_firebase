@@ -99,7 +99,7 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   Widget _buildMessageInput() {
-    return Padding(
+    return Padding
       padding: const EdgeInsets.symmetric(horizontal: 25.0),
       child: Row(
         children: [
