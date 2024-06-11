@@ -44,10 +44,12 @@ dependencies:
   firebase_messaging: ^14.9.3
   shared_preferences: ^2.2.3
   firebase_in_app_messaging: ^0.7.5+7
-  http: ^1.2.1
   firebase_storage: ^11.7.7
   image_picker: ^1.1.2
   zego_uikit_prebuilt_call: ^4.11.7
+  intl: ^0.19.0
+  file_picker: ^6.0.0
+  advance_pdf_viewer2: ^2.0.5+1
 
 dev_dependencies:
   flutter_test:

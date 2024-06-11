@@ -54,7 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       )),
       floatingActionButton: FloatingActionButton(onPressed: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => VideoCallScreen()));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => const VideoCallScreen()));
       },child: const Icon(Icons.video_call),),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
